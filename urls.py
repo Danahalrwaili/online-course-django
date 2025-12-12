@@ -1,7 +1,21 @@
 from django.urls import path
-from courses import views
+from . import views
+
+app_name = 'onlinecourse'
+
 urlpatterns = [
- path('', views.index),
- path('course/1/exam/', views.exam),
- path('course/1/result/', views.result),
+    path('', views.index, name='index'),
+    path('<int:course_id>/exam/', views.exam, name='exam'),
+
+    path(
+        '<int:course_id>/submit/',
+        views.submit,
+        name='submit'
+    ),
+
+    path(
+        'course/<int:course_id>/submission/<int:submission_id>/result/',
+        views.show_exam_result,
+        name='show_exam_result'
+    ),
 ]
